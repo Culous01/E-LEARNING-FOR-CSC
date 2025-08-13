@@ -8,7 +8,7 @@ export const FeatureCard = ({icons, title, description}) => {
                 <img src={icons} className='icons' alt="icons" />
             </div>
             <h3 className='lg:text-4xl md:text-3xl title-text text-normal font-bold font-Playfair'>{title}</h3>
-            <p className='lg:text-2xl md:text-2xl description-text font-Poppins font-normal'>{description}</p>
+            <p className='lg:text-2xl md:text-2xl text-xs description-text font-Poppins font-normal'>{description}</p>
         </div>
     )
 }
