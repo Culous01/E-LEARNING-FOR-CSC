@@ -7,6 +7,73 @@
     --font-Playfair: "Playfair Display", serif;    
 }
 
-    /* * {
-        outline: 2px solid darkblue;
-    } */
+        * {
+            outline: 2px solid darkblue;
+        }
+
+    .studyHub{
+        color: rgba(26, 46, 86, 1);
+    }
+
+    .why-choose {
+        color: rgba(75, 75, 75, 1);
+    }
+
+@media screen and (max-width: 360px) {
+    .studentImage{
+        width: 169px;
+        height: 169px;
+    }
+
+    .studyHub{
+        font-size: 24px;
+    }
+
+
+    .icons-container {
+        width: 65%;
+    }
+
+    .icons {
+        width: 57px;
+    }
+
+    .title-text {
+        font-size: 13px;
+        color: rgba(47, 68, 116, 1);
+    }
+
+    .description-text {
+        font-size: 10px;
+        color: rgba(47, 68, 116, 1);
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .icons-container {
+        width: 55%;
+    }
+
+        .icons {
+        width: 57px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+        .icons {
+        width: 77px;
+    }
+}
+
+@media screen and (max-width: 884px) {
+
+        .icons {
+        width: 87px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+        .icons {
+        width: 97px;
+    }
+}

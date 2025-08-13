@@ -1,10 +1,10 @@
 import React from 'react'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-    { name: 'LOG IN', href: '#' },
-    { name: 'SIGN UP', href: '#'},
+    { name: 'LOG IN', href: '/Login' },
+    { name: 'SIGN UP', href: '/SignUp'},
     ]
     
     function classNames(...classes) {
