@@ -7,9 +7,9 @@
     --font-Playfair: "Playfair Display", serif;    
 }
 
-        * {
-            outline: 2px solid darkblue;
-        }
+    /* * {
+        outline: 2px solid darkblue;
+    } */
 
     .studyHub{
         color: rgba(26, 46, 86, 1);
