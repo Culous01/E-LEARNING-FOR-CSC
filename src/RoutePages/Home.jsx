@@ -12,7 +12,7 @@ const Home = () => {
         <>
             <Navbar />
 
-            <div className='flex justify-center mr-6'>
+            <div className='flex justify-center mr-6 -mt-15'>
                 <img src={Student} className='studentImage' alt=""/>
             </div>
 
@@ -45,7 +45,7 @@ const Home = () => {
                 />
             </div>
             
-            <div className='flex justify-center mb-10 lg:px-5 md:px-5 px-10'>
+            <div className='flex justify-center mb-20 mt-10 lg:px-5 md:px-5 px-10'>
                     <a href="/Login" className='w-xl p-4 bg-blue-950 rounded-xl text-center text-2xl text-amber-400 font-bold'>GET STARTED</a>
             </div>
         </>
