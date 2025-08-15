@@ -5,11 +5,11 @@
 @theme {
     --font-Poppins:"Poppins", 'sans-serif'; 
     --font-Playfair: "Playfair Display", serif;    
-}
+}   
 
-    /* * {
-        outline: 2px solid darkblue;
-    } */
+        /* * {
+            outline: 2px solid darkblue;
+        } */
 
     .studyHub{
         color: rgba(26, 46, 86, 1);
@@ -17,6 +17,19 @@
 
     .why-choose {
         color: rgba(75, 75, 75, 1);
+    }
+
+    .title-text {
+        color: rgba(47, 68, 116, 1);
+    }
+
+    .description-text {
+        color: rgba(47, 68, 116, 1);
+    }
+
+    .input-text::placeholder {
+        color: rgba(26, 46, 86, 1);
+        font-weight: bold;
     }
 
 @media screen and (max-width: 360px) {
@@ -29,7 +42,6 @@
         font-size: 24px;
     }
 
-
     .icons-container {
         width: 65%;
     }
@@ -40,12 +52,10 @@
 
     .title-text {
         font-size: 13px;
-        color: rgba(47, 68, 116, 1);
     }
 
     .description-text {
         font-size: 10px;
-        color: rgba(47, 68, 116, 1);
     }
 }
 

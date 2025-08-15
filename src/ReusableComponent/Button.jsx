@@ -15,12 +15,12 @@ import React from 'react'
 
 export const Button = ({ title, OnClick, type}) => {
     return (
-                <button
-        type={type}
-        onClick={OnClick}
-        className="w-full px-4 py-2 "
-        >
-        {title}
+        <button
+            className="w-full p-5 mt-4 rounded-full text-amber-400 text-2xl font-bold bg-blue-950 cursor-pointer"
+            type={type}
+            onClick={OnClick}
+            >
+            {title}
         </button>
     )
 }

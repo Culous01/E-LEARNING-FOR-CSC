@@ -3,6 +3,7 @@ import './App.css';
 // import { Navbar } from './ReusableComponent/Navbar';
 import Home from './RoutePages/Home';
 import Login from './RoutePages/Login';
+import SignUp from "./RoutePages/SignUp";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/SignUp" element={<SignUp />} />
       </Routes>
 
     </>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Disclosure} from '@headlessui/react'
-import { LoginForm } from '../Authentication/LoginForm';
+import { Disclosure} from '@headlessui/react';
+import { SignUpForm } from '../Authentication/SignUpForm';
 
-const Login = () => {
+const SignUp = () => {
     return (
         <>
-        <Disclosure
+            <Disclosure
                 as="nav"
                 className="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10"
                 >
@@ -21,17 +21,17 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-        </Disclosure>
-        
+            </Disclosure>
+
             <div className="flex items-center justify-center min-h-screen">
                 <div className="w-full max-w-xl p-5 flex flex-col">
-                    <h1 className="mb-15 text-3xl font-bold text-center">Login your details</h1>
-                    <LoginForm />
+                    <h1 className="mb-13 text-3xl font-bold text-center">Sign Up</h1>
 
-                    <div className='w-full h-0.5 bg-blue-950 mt-14'></div>
-
-                    <p className="mt-10 text-base text-center font-bold ">
-                        Don't have an account? <a href="/Signup" className="text-blue-950 hover:underline">Sign up</a>
+                    <SignUpForm />
+                    
+                    <div className='w-full h-0.5 bg-blue-950 mt-8'></div>
+                    <p className="mt-8 text-base text-center font-bold ">
+                        Already have an account? <a href="/Login" className="text-blue-950 hover:underline">Log In</a>
                     </p>
                 </div>
             </div>
@@ -39,4 +39,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp
