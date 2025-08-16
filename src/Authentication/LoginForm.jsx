@@ -22,7 +22,7 @@ export const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-10 flex flex-col">
+        <form onSubmit={handleSubmit} className="lg:space-y-10 md:space-y-8 space-y-7 flex flex-col">
 
             <div className='w-full relative'>
                 <LuCircleUserRound className="absolute left-8 text-amber-400 text-3xl top-1/2 transform -translate-y-1/2 " />
@@ -44,7 +44,7 @@ export const LoginForm = () => {
                 />
             </div>
 
-            <a href="/forgot-password" className='-mt-8 mr-10 font-bold lg:text-base text-xs hover:underline flex justify-end'>Forget a password?</a>
+            <a href="/forgot-password" className='-mt-5 mr-7 font-bold text-base text-blue-950 hover:underline flex justify-end'>Forget a password?</a>
             
             {/* <Button  title='Log In' type="submit"  Onclick={handleSubmit} /> */}
             <Button type="submit" isLoading={isLoading}>

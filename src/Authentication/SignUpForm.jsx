@@ -26,7 +26,7 @@ const DropdownButton = ({ label, options, onSelect }) => {
             <button
                 type='button'
                 onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-center gap-2 border-2 border-blue-950 lg:px-5 lg:py-3 md:px-4 md:py-3 p-3 rounded-full font-bold text-blue-950 lg:text-xl md:text-xl text-base focus:outline-none"
+                className="w-full flex items-center justify-center gap-2 border-2 border-blue-950 p-2 rounded-full font-bold text-blue-950 lg:text-xl md:text-xl text-base focus:outline-none"
             aria-required
             >
                 <span>{selected}</span>
@@ -108,7 +108,7 @@ export const SignUpForm = () => {
                 />
             </div>
 
-            <div className=" flex gap-4 mt-3">
+            <div className=" flex gap-10 mt-3">
                 <DropdownButton label="Level" options={["100", "200", "300", "400"]} onSelect={setLevel} />
                 <DropdownButton label="Semester" options={["First", "Second"]} onSelect={setSemester}/>
             </div>

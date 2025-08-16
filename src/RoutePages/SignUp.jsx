@@ -23,15 +23,15 @@ const SignUp = () => {
                 </div>
             </Disclosure>
 
-            <div className="flex justify-center lg:mt-5 ">
+            <div className="flex justify-center lg:mt-5">
                 <div className="w-full max-w-xl p-5 flex flex-col">
                     <h1 className="mb-13 text-blue-950 lg:text-4xl text-3xl font-bold text-center">Sign Up</h1>
 
                     <SignUpForm />
                     
                     <div className='w-full h-0.5 bg-blue-950 mt-8'></div>
-                    <p className="mt-8 text-base text-center font-bold ">
-                        Already have an account? <a href="/Login" className="text-blue-950 hover:underline">Log In</a>
+                    <p className="mt-8 text-base text-center font-bold text-blue-950">
+                        Already have an account? <a href="/Login" className="underline">Log In</a>
                     </p>
                 </div>
             </div>

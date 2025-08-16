@@ -45,7 +45,7 @@ const Home = () => {
                 />
             </div>
             
-            <div className='flex justify-center mb-15    mt-10 lg:px-5 md:px-5 px-14'>
+            <div className='flex justify-center mb-15 mt-10 lg:px-5 md:px-5 px-14'>
                     <a href="/Login" className='w-xl p-5 bg-blue-950 rounded-xl text-center lg:text-2xl md:text-2xl text-xl text-amber-400 font-bold'>GET STARTED</a>
             </div>
         </>
