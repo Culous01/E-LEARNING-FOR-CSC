@@ -23,9 +23,9 @@ const Login = () => {
                 </div>
         </Disclosure>
         
-            <div className="flex items-center justify-center min-h-screen">
+            <div className="flex items-center justify-center min-h-screen -mt-12">
                 <div className="w-full max-w-xl p-5 flex flex-col">
-                    <h1 className="mb-15 text-3xl font-bold text-center">Login your details</h1>
+                    <h1 className="mb-15 lg:text-4xl text-3xl text-blue-950 font-bold text-center">Login your details</h1>
                     <LoginForm />
 
                     <div className='w-full h-0.5 bg-blue-950 mt-14'></div>

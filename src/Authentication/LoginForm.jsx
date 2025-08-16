@@ -7,13 +7,18 @@ import { MdLockOutline } from "react-icons/md";
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // setIsLoading(true);
+        setIsLoading(true);
         // TODO: Add API call logic here
         console.log('Logging in with:', { username, password });
+        
+        setTimeout(() => {
+        setIsLoading(false);
+        alert("Login successful!"); // or navigate to dashboard
+    }, 1000);
     };
 
     return (
@@ -39,9 +44,12 @@ export const LoginForm = () => {
                 />
             </div>
 
-            <a href="" className='-mt-8 mr-10 font-bold lg:text-base text-xs hover:underline flex justify-end'>Forget a password?</a>
+            <a href="/forgot-password" className='-mt-8 mr-10 font-bold lg:text-base text-xs hover:underline flex justify-end'>Forget a password?</a>
             
-            <Button  title='Log In' type="submit"  Onclick={handleSubmit} />
+            {/* <Button  title='Log In' type="submit"  Onclick={handleSubmit} /> */}
+            <Button type="submit" isLoading={isLoading}>
+                Log In
+            </Button>
         </form>
     );
 };  

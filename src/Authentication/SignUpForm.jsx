@@ -8,7 +8,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropright } from "react-icons/io";
 
 
-const DropdownButton = ({ label, options }) => {
+const DropdownButton = ({ label, options, onSelect }) => {
     const [selected, setSelected] = useState(label);
     const [open, setOpen] = useState(false);
 
@@ -21,30 +21,27 @@ const DropdownButton = ({ label, options }) => {
     };
 
     return (
-        <div className="w-full relative inline-bloc text-left">
+        <div className="w-full relative inline-block text-left">
         {/* Button */}
             <button
+                type='button'
                 onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-center gap-2 border-2 border-blue-950 lg:px-5 lg:py-3 md:px-4 md:py-3 p-3 rounded-full font-bold text-blue-900 lg:text-xl md:text-xl text-base focus:outline-none"
+                className="w-full flex items-center justify-center gap-2 border-2 border-blue-950 lg:px-5 lg:py-3 md:px-4 md:py-3 p-3 rounded-full font-bold text-blue-950 lg:text-xl md:text-xl text-base focus:outline-none"
             aria-required
             >
                 <span>{selected}</span>
-                {!open ? <IoMdArrowDropdown className="text-blue-950 lg:text-4xl text-3xl" /> : <IoMdArrowDropright className='text-blue-950 text-4xl' />}
+                {!open ? <IoMdArrowDropdown className="text-blue-950 lg:text-4xl md:text-3xl text-2xl" /> : <IoMdArrowDropright className='text-blue-950 lg:text-4xl md:text-3xl text-2xl' />}
             </button>
 
         {/* Dropdown Items */}
         {open && (
-            <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white z-10">
+            <div className="absolute mt-1 w-full rounded-md shadow-lg bg-white z-10">
                 <ul className="py-1 text-sm">
                     {options.map((option, index) => (
                     <li
                         key={index}
-                        onClick={() => {
-                        setSelected(option);
-                        setOpen(false);
-                        console.log(option)
-                        }}
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleSelect(option)}
+                        className="px-4 py-2 hover:bg-blue-950 hover:text-white cursor-pointer"
                     >
                         {option}
                     </li>
@@ -61,15 +58,21 @@ export const SignUpForm = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [level, setLevel] = useState("");
-    const [semester, setSemester] = useState("");
-    // const [isLoading, setIsLoading] = useState(false);
+    const [level, setLevel] = useState('');
+    const [semester, setSemester] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // setIsLoading(true);
+        setIsLoading(true);
         // TODO: Add API call logic here
-        console.log('Signing up with:', { username, email, password });
+        console.log('Signing up with:', { username, email, password, level, semester});
+
+        setTimeout(() => {
+            setIsLoading(false);
+            alert('Account created successfully!');
+    }, 1000); // simulate API
     };
 
     return (
@@ -106,11 +109,14 @@ export const SignUpForm = () => {
             </div>
 
             <div className=" flex gap-4 mt-3">
-                <DropdownButton label="Level" options={["100", "200", "300", "400"]} />
-                <DropdownButton label="Semester" options={["First", "Second", ""]} />
+                <DropdownButton label="Level" options={["100", "200", "300", "400"]} onSelect={setLevel} />
+                <DropdownButton label="Semester" options={["First", "Second"]} onSelect={setSemester}/>
             </div>
             
-            <Button  title='Create account' type="submit"  Onclick={handleSubmit} />
+            {/* <Button  title='Create account' type="submit"  Onclick={handleSubmit} /> */}
+            <Button type='submit' isLoading={isLoading}>
+                Create account
+            </Button>
         </form>
     );
 };  
