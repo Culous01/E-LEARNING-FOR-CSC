@@ -13,12 +13,21 @@ export const LoginForm = () => {
         event.preventDefault();
         setIsLoading(true);
         // TODO: Add API call logic here
+
+        // const fetchData = async () => {
+        //     try {
+        //         const data = await 
+        //     } catch (error) {
+                
+        //     }
+        // } 
+
         console.log('Logging in with:', { username, password });
         
         setTimeout(() => {
         setIsLoading(false);
-        alert("Login successful!"); // or navigate to dashboard
-    }, 1000);
+        // alert("Login successful!"); // or navigate to dashboard
+    }, 2000);
     };
 
     return (
@@ -45,8 +54,6 @@ export const LoginForm = () => {
             </div>
 
             <a href="/forgot-password" className='-mt-5 mr-7 font-bold text-base text-blue-950 hover:underline flex justify-end'>Forget a password?</a>
-            
-            {/* <Button  title='Log In' type="submit"  Onclick={handleSubmit} /> */}
             <Button type="submit" isLoading={isLoading}>
                 Log In
             </Button>

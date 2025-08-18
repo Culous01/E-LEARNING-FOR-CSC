@@ -5,6 +5,11 @@ import { SignUpForm } from '../Authentication/SignUpForm';
 const SignUp = () => {
     return (
         <>
+            <main className='relative min-h-screen overflow-hidden'>
+            <div className='absolute block sm:hidden md:block -right-14 -bottom-13 rotate-12 -z-10'>
+                <div className='w-30 h-30 bg-slate-100 rounded-full -mb-1.5'></div>
+                <div className='w-36 h-36 bg-slate-100 rounded-full'></div>
+            </div>
             <Disclosure
                 as="nav"
                 className="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10"
@@ -35,6 +40,7 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
+        </main>
         </>
     )
 }

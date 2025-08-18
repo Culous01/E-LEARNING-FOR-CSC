@@ -5,10 +5,10 @@ import { LoginForm } from '../Authentication/LoginForm';
 const Login = () => {
     return (
         <>
-        <main className='relative overflow-hidden'>
-            <div className='absolute block sm:hidden md:block -left-10 -bottom-24 -rotate-6 -z-10'>
-                <div className='w-26 h-26 bg-gray-200 rounded-full -mb-1.5'></div>
-                <div className='w-36 h-36 bg-gray-200 rounded-full'></div>
+        <main className='relative min-h-screen overflow-hidden'>
+            <div className='absolute block sm:hidden md:block -left-11 -bottom-13 -rotate-6 -z-10'>
+                <div className='w-30 h-30 bg-slate-100 rounded-full -mb-1.5'></div>
+                <div className='w-36 h-36 bg-slate-100 rounded-full'></div>
             </div>
         <Disclosure
                 as="nav"
@@ -28,7 +28,7 @@ const Login = () => {
                 </div>
         </Disclosure>
         
-            <div className="flex items-center justify-center min-h-screen -mt-12">
+            <div className="flex justify-center min-h-scree mt-10">
                 <div className="w-full max-w-xl p-5 flex flex-col">
                     <h1 className="mb-15 lg:text-4xl text-3xl text-blue-950 font-bold text-center">Login your details</h1>
                     <LoginForm />

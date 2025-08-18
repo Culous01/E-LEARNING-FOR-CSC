@@ -72,20 +72,21 @@ export const SignUpForm = () => {
         setTimeout(() => {
             setIsLoading(false);
             alert('Account created successfully!');
-    }, 1000); // simulate API
+    }, 2000); // simulate API
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8 flex flex-col">
+        <form onSubmit={handleSubmit} className="lg:space-y-8 md:space-y-7 space-y-6 flex flex-col">
 
             <div className='w-full relative'>
                 <LuCircleUserRound className="absolute left-8 text-amber-400 text-3xl top-1/2 transform -translate-y-1/2 " />
                 <Input
                     type="text"
                     value={username}
+                    autocomplete="username"
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
-                />
+                    />
             </div>
 
             <div className='w-full relative'>
@@ -93,6 +94,7 @@ export const SignUpForm = () => {
                 <Input
                     type="email"
                     value={email}
+                    autocomplete="email"
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email"
                 />
@@ -103,12 +105,13 @@ export const SignUpForm = () => {
                 <Input
                     type="password"
                     value={password}
+                    autocomplete="password"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                 />
             </div>
 
-            <div className=" flex gap-10 mt-3">
+            <div className=" flex gap-10 lg:mt-3 md:mt-3 mt-2">
                 <DropdownButton label="Level" options={["100", "200", "300", "400"]} onSelect={setLevel} />
                 <DropdownButton label="Semester" options={["First", "Second"]} onSelect={setSemester}/>
             </div>
