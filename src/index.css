@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 @theme {
-    --font-Poppins:"Poppins", 'sans-serif'; 
+    --font-Poppins:"Poppins", sans-serif;
+    --font-Inter: "Inter", sans-serif;
     --font-Playfair: "Playfair Display", serif;    
 }   
 
@@ -12,7 +14,7 @@
         } */
 
     .studyHub{
-        color: rgba(26, 46, 86, 1);
+        color: rgb(26,46,86);
     }
 
     .why-choose {
@@ -20,7 +22,7 @@
     }
 
     .title-text {
-        color: rgba(47, 68, 116, 1);
+        color: rgb(26,46,86);
     }
 
     .description-text {
@@ -28,62 +30,6 @@
     }
 
     .input-text::placeholder {
-        color: rgba(26, 46, 86, 1);
+        color: rgb(26,46,86);
         font-weight: bold;
     }
-
-@media screen and (max-width: 360px) {
-    .studentImage{
-        width: 169px;
-        height: 169px;
-    }
-
-    .studyHub{
-        font-size: 24px;
-    }
-
-    .icons-container {
-        width: 65%;
-    }
-
-    .icons {
-        width: 57px;
-    }
-
-    .title-text {
-        font-size: 13px;
-    }
-
-    .description-text {
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width: 428px) {
-    .icons-container {
-        width: 55%;
-    }
-
-        .icons {
-        width: 57px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-        .icons {
-        width: 77px;
-    }
-}
-
-@media screen and (max-width: 884px) {
-
-        .icons {
-        width: 87px;
-    }
-}
-
-@media screen and (max-width: 1280px) {
-        .icons {
-        width: 97px;
-    }
-}

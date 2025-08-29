@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Disclosure} from '@headlessui/react'
-import { LoginForm } from '../Authentication/LoginForm';
+import { LoginForm } from '../ReusableComponent/LoginForm';
+import { BackwardIcon } from './SignUp';
+// import { MdKeyboardArrowLeft } from "react-icons/md";
+
+
 
 const Login = () => {
+    const navigate = useNavigate();
+
     return (
         <>
         <main className='relative min-h-screen overflow-hidden'>
@@ -17,7 +24,7 @@ const Login = () => {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
                     <div className="relative flex h-12 items-center justify-between">
                         <div className="flex shrink-0 items-center">
-                            <a href="/" className='text-2xl text-blue-950 font-bold'>LOGO</a>
+                            <a href="/Home" className='text-2xl text-blue-950 font-bold'>LOGO</a>
                             {/* <img
                                 alt="Your Company"
                                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
@@ -28,9 +35,12 @@ const Login = () => {
                 </div>
         </Disclosure>
         
-            <div className="flex justify-center min-h-scree mt-10">
+            <div className="flex justify-center mt-10">
                 <div className="w-full max-w-xl p-5 flex flex-col">
-                    <h1 className="mb-15 lg:text-4xl text-3xl text-blue-950 font-bold text-center">Login your details</h1>
+                    <div className='relative'>
+                        <BackwardIcon />
+                        <h1 className="mb-15 lg:pl-2 md:pr-20 pl-10 lg:text-4xl text-3xl text-blue-950 font-bold text-center"> Login your details</h1>
+                    </div>
                     <LoginForm />
 
                     <div className='w-full h-0.5 bg-blue-950 lg:mt-14 md:mt-14 mt-10'></div>

@@ -31,7 +31,7 @@ export const Button = ({ children, onClick, type = 'button', isLoading = false }
         type={type}
         onClick={onClick}
         disabled={isLoading}
-        className="w-full lg:p-5 md:p-4 p-3 mt-3 rounded-full text-amber-400 lg:text-2xl md:text-xl text-base font-bold bg-blue-950 cursor-pointer"
+        className="w-full lg:p-5 md:p-4 p-3 mt-3 rounded-full text-amber-400 lg:text-2xl md:text-xl text-base font-bold bg-[rgb(26,46,86)] cursor-pointer"
         >
         {isLoading ? (<div className='flex justify-center items-center gap-3'> <Spinner/> <span>Loading</span></div>) : children}
         </button>
