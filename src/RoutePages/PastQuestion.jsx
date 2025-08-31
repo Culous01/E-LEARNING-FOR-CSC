@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { PastQuestionsCard } from '../ReusableComponent/PastQuestionsCard';
 
-
 const PastQuestion = () => {
     const { courseCode } = useParams();
     const [pastQuestions, setPastQuestions] = useState([]);
@@ -18,9 +17,10 @@ const PastQuestion = () => {
             credentials: 'include',
         });
 
-        const data = await response.json();
+        let data = await response.json();
+        data = data.pastQuestions;
         console.log(data); // Assuming the API returns an array of past questions
-        setPastQuestions(Array.isArray(data) ? data : [data]); 
+        setPastQuestions(Array.isArray(data) ? data : []);
     } catch (error) {
         console.error('Error fetching past questions:', error);
         return [];

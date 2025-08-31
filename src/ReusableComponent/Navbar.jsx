@@ -39,7 +39,7 @@ export const NavBars = () => {
     return (
             <Disclosure as="nav" className="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
                 <div className="mx-auto max-w-7xl px-5 md:px-10 lg:px-10">
-                    <div className="relative flex h-24 items-center justify-between">
+                    <div className="flex h-24 items-center justify-between">
                         {/* <MdKeyboardArrowLeft
                             className='bg-blue-950 text-amber-400 rounded-xl text-4xl cursor-pointer'
                             onClick={() => { navigate(-1) }}
@@ -51,7 +51,7 @@ export const NavBars = () => {
                         />
                     
                         {user?.role === "admin" && (
-                            <Link to="/adminDashboard" className="absolute -translate-x-1/2 top-1/2  left-1/2 underline font-bold -mt-10 text-[rgb(26,46,86)] text-center">
+                            <Link to="/adminDashboard" className="underline font-bold text-[rgb(26,46,86)] text-center">
                                 Admin
                             </Link>
                         )}
@@ -62,7 +62,7 @@ export const NavBars = () => {
                                 onClick={handleLogout}
                                 className="bg-red-600 text-white px-4 lg:py-2 py-1 rounded-lg font-bold hover:bg-blue-400 transition"
                                 >
-                                <IoIosLogOut />
+                                <IoIosLogOut className='text-2xl ' />
                             </button> : <p></p>}
 
                         {/* </div> */}
