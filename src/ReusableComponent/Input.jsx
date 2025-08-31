@@ -16,3 +16,6 @@ export const Input = ({type, id, name, value, autoComplete, onChange, placeholde
         />
     )
 }
+
+
+

@@ -13,14 +13,13 @@ export const LoginForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth(); // <-- Use the context hook
 
-    const handleSubmit = async (event) => {
+const handleSubmit = async (event) => {
         event.preventDefault();
         await login({ email, password }, setIsLoading)
-    }
+}
 
     return (
         <form onSubmit={handleSubmit} className="lg:space-y-10 md:space-y-8 space-y-7 flex flex-col">
-
             <div className='w-full relative'>
                 <EmailIcon />
                 <Input
@@ -37,6 +36,7 @@ export const LoginForm = () => {
 
             <div className='w-full relative'>
                 <MdLockOutline className="absolute left-10 text-amber-400 text-3xl top-1/2 transform -translate-y-1/2 "/>
+                
                 <Input
                     type="password"
                     id="password"
