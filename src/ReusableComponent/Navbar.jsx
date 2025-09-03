@@ -38,7 +38,7 @@ export const NavBars = () => {
     
     return (
             <Disclosure as="nav" className="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
-                <div className="mx-auto max-w-7xl px-5 md:px-10 lg:px-10">
+                <div className="mx-auto max-w-7xl lg:px-10 md:px-10 px-5">
                     <div className="flex h-24 items-center justify-between">
                         {/* <MdKeyboardArrowLeft
                             className='bg-blue-950 text-amber-400 rounded-xl text-4xl cursor-pointer'

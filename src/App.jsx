@@ -10,6 +10,7 @@ import Dashboard from "./RoutePages/Dashboard";
 import PastQuestion from "./RoutePages/PastQuestion";
 import { AuthProvider, useAuth } from "./Contexts/AuthContext";
 import AdminDashboard from "./RoutePages/AdminDashboard";
+import Quiz from "./RoutePages/Quiz";
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -30,8 +31,9 @@ function AppRoutes() {
         element={user ? <Dashboard /> : <Navigate to="/login" replace />} 
       />
       <Route path="/pastQuestion/:courseCode" element={user ? <PastQuestion /> : <Navigate to="/login" replace/> } />
-      {/* <Route path="/adminDashboard" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/login" replace />} /> */}
-      <Route path="/adminDashboard" element={<AdminDashboard />} />
+      <Route path="/quiz/:courseCode" element={user ? <Quiz /> : <Navigate to="/login" replace/> } />
+      <Route path="/adminDashboard" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/login" replace />} />
+      {/* <Route path="/adminDashboard/*" element={<AdminDashboard />} /> */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

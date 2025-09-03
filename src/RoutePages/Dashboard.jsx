@@ -73,7 +73,7 @@ import { useAuth } from '../Contexts/AuthContext';
     const Dashboard = () => {
     const [level, setLevel] = useState('');
     const [semester, setSemester] = useState('');
-    const { user, courses, updateProfile } = useAuth(); // ✅ Get logged in user from context
+    const { user, courses, updateProfile } = useAuth(); // Get logged in user from context
     const [openEdit, setOpenEdit] = useState(false);
     const [displayLevel, setDisplayLevel] = useState(user?.level || "N/A");
     const [displaySemester, setDisplaySemester] = useState(
@@ -114,9 +114,9 @@ import { useAuth } from '../Contexts/AuthContext';
         <div className='min-h-screen'>
             <NavBars />
 
-            <div className="w-full flex justify-center mt-10">
+            <div className="w-full flex justify-center mt-5">
                 <div className="w-5xl flex lg:px-10 md:px-10 px-5 flex-col lg:space-y-28 space-y-14">
-                    <div className='flex flex-col justify-center space-y-10'>
+                    <div className='flex flex-col justify-center space-y-5'>
                         <div className='flex items-center justify-center gap-2'>
                             <FaRegUser className="font-light text-amber-400 lg:text-4xl md:text-3xl text-2xl transform " />
                             <h1 className='font-Playfair font-medium lg:text-3xl'>Hello, {displayName}</h1>

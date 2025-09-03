@@ -26,17 +26,17 @@ const Home = () => {
                 <FeatureCard 
                     homeImage = {DocumentBooks}
                     title = "Manuals (PDFs)"
-                    description= "Manuals for each course is chapter-organized in PDF format and modules for easy access"
+                    description= "Manuals for each course is organized in PDF for easy access."
                 />
                 <FeatureCard 
                     homeImage = {Questions}
                     title = "Past questions"
-                    description= "Access a collection of past exam questions organized by course or effective practice"
+                    description= "Access a collection of past exam questions organized by course for effective practice."
                 />
                 <FeatureCard 
                     homeImage = {Quiz}
                     title = "Quizzes"
-                    description= "Interactive quizzes designed to test your knowledge and track your progress"
+                    description= "Interactive quizzes designed to test your knowledge and track your progress."
                 />
                 <FeatureCard 
                     homeImage = {Updates}

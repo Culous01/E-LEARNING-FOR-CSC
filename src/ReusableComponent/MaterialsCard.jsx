@@ -49,10 +49,10 @@ const MaterialsCard = ({cardImage, courseCode, title, pdfUrl}) => {
                             shadow-md hover:opacity-90 transition-all duration-300 lg:text-base md:text-base/2.5 text-[7px]/1.5' to={`/pastQuestion/${courseCode}`}>Past question
                         </Link>
 
-                        <ViewButton 
-                        text='Quiz'
-                        bgColor='rgb(251,133,0)'
-                        />
+
+                        <Link className='w-full lg:py-3 md:py-4 py-1.5 px-1 text-center rounded-4xl text-white bg-[rgb(251,133,0)] font-medium 
+                            shadow-md hover:opacity-90 transition-all duration-300 lg:text-base md:text-base/2.5 text-[7px]/1.5' to={`/quiz/${courseCode}`}>Quiz
+                        </Link>
                     </div>
                 </div>
             </div>

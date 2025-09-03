@@ -8,24 +8,24 @@ const PastQuestion = () => {
     const [pastQuestions, setPastQuestions] = useState([]);
 
     const getPastQuestions = async () => {
-    try {
-        const response = await fetch(`https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/getPastQuestionsPerCourse/${courseCode}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
+        try {
+            const response = await fetch(`https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/getPastQuestionsPerCourse/${courseCode}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-        let data = await response.json();
-        data = data.pastQuestions;
-        console.log(data); // Assuming the API returns an array of past questions
-        setPastQuestions(Array.isArray(data) ? data : []);
-    } catch (error) {
-        console.error('Error fetching past questions:', error);
-        return [];
-    }    
-}
+            let data = await response.json();
+            data = data.pastQuestions;
+            console.log(data); // Assuming the API returns an array of past questions
+            setPastQuestions(Array.isArray(data) ? data : []);
+        } catch (error) {
+            console.error('Error fetching past questions:', error);
+            return [];
+        }    
+    }
 
     useEffect(() => {
         getPastQuestions();
