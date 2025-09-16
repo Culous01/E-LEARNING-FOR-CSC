@@ -46,7 +46,7 @@ const MaterialsCard = ({cardImage, courseCode, title, pdfUrl}) => {
                     
                     <div className='col-span-2 flex items-center lg:space-x-4 md:space-x-3 space-x-2'>
                         <Link className='w-full lg:py-3 md:py-4 py-1.5 px-1 text-center rounded-4xl text-white bg-[rgb(33,158,188)] font-medium 
-                            shadow-md hover:opacity-90 transition-all duration-300 lg:text-base md:text-base/2.5 text-[7px]/1.5' to={`/pastQuestion/${courseCode}`}>Past question
+                            shadow-md hover:opacity-90 transition-all duration-300 lg:text-base md:text-base/2.5 text-[7px]/1.5' to={`/pastQuestion/${courseCode}`}>Past Question
                         </Link>
 
 

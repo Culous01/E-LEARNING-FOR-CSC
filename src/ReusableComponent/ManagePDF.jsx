@@ -3,10 +3,61 @@ import { FaPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { BiSolidFilePdf } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import { FaImage } from "react-icons/fa";
 import { useAuth } from '../Contexts/AuthContext';
 
+// CoverImageUploader Component
+export const CoverImageUploader = ({ onFileSelect }) => {
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        setSelectedImage(file);
+        onFileSelect(file);
+        } else {
+        alert("Please select a valid image file");
+        }
+    };
+
+    return (
+        <div
+        className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-10 mt-5 w-full cursor-pointer hover:border-blue-500"
+        onClick={() => document.getElementById("coverImageInput").click()}
+        >
+        <FaImage className="text-5xl text-gray-500 mb-3" />
+        {selectedImage ? (
+            <>
+            <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="Cover Preview"
+                className="w-32 h-32 object-cover rounded-md mb-3"
+            />
+            <p className="text-center font-semibold text-gray-700">
+                {selectedImage.name}
+            </p>
+            </>
+        ) : (
+            <>
+            <p className="font-semibold text-gray-700">Select Cover Image</p>
+            <p className="text-sm text-gray-500">Tap to browse image files</p>
+            </>
+        )}
+
+        {/* Hidden input */}
+        <input
+            id="coverImageInput"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+        />
+        </div>
+    );
+};
+
 // PdfUploader Selection
-export const PdfUploader = ({onFileSelect, }) => {
+export const PdfUploader = ({onFileSelect}) => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileChange = (e) => {
@@ -35,17 +86,19 @@ export const PdfUploader = ({onFileSelect, }) => {
             </>
         )}
 
-        {/* Hidden input */}
-        <input
-            id="pdfInput"
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileChange}
-            className="hidden"
-        />
+            {/* Hidden input */}
+            <input
+                id="pdfInput"
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                className="hidden"
+            />
         </div>
     );
 };
+
+
 
     // ManageQuizArray container
 export const ManageQuizArray = ({SelectedPdf, Description, Time, onDelete}) => {
@@ -124,6 +177,7 @@ export const ManagePDF = () => {
     const [level, setLevel] = useState('');
     const [semester, setSemester] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedCoverImage, setSelectedCoverImage] = useState(null);
 
         // Handle Delete Pdf
     const handleDelete = (id) => {
@@ -136,6 +190,7 @@ export const ManagePDF = () => {
         setLevel('');
         setSemester('');
         setSelectedFile(null);
+        setSelectedCoverImage(null);
         setOpenEdit(false);
     };
     
@@ -148,13 +203,15 @@ export const ManagePDF = () => {
             pdfData.append("semester", semester);
             pdfData.append("pdf", selectedFile);
 
-            const response = await fetch("", {
+            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/createPastQuestion', {
             method: "POST",
             body: (pdfData),
                 credentials: 'include',
         });
 
-            if (!response.ok) throw new Error("Failed to upload PDF");
+            if (!response.ok) {
+                throw new Error("Failed to upload PDF");
+            }
 
             const data = await response.json();
             console.log("Upload successful:", data);
@@ -215,6 +272,10 @@ export const ManagePDF = () => {
 
                             <div>
                                 <PdfUploader onFileSelect={setSelectedFile} />
+                            </div>
+
+                            <div>
+                                <CoverImageUploader onFileSelect={setSelectedCoverImage} />
                             </div>
 
                             <div className='flex w-full space-x-5 mt-10'>

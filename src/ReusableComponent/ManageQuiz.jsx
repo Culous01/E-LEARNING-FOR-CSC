@@ -117,7 +117,7 @@ export const ManageQuiz = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2">
-                    <h1>Correct Answer :</h1>
+                    <h1 className="text-[rgb(26,46,86)] lg:text-xl md:text-base text-xs">Correct Answer :</h1>
                     <QuizInput 
                         type="text"
                         id="correctAnswer"

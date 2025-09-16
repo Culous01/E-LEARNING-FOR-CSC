@@ -31,7 +31,7 @@ const PastQuestion = () => {
         getPastQuestions();
     }, [courseCode]);
 
-    // console.log(courseCode); // Log the courseCode to verify it's being captured correctly
+    
 
     return (
         <div className='h-screen'>

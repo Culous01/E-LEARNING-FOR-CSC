@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { NavBars } from '../ReusableComponent/Navbar';
 import MaterialsCard from '../ReusableComponent/MaterialsCard';
 // import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -79,9 +79,24 @@ import { useAuth } from '../Contexts/AuthContext';
     const [displaySemester, setDisplaySemester] = useState(
         user?.semester ? (user.semester === 1 ? "1st" : "2nd") : "N/A"
     );
+    const dropdownRef = useRef(null);
+
+    // ✅ Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+        // If dropdown is open and the click target is NOT inside the dropdown or the edit button, close it
+        if (openEdit && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+            setOpenEdit(false);
+        }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [openEdit]);
+
 
     // Handle save button click
-    const handleSave = () => {
+    const handleSave = async () => {
         if (level) {
             setDisplayLevel(level.toString());
         }
@@ -95,7 +110,8 @@ import { useAuth } from '../Contexts/AuthContext';
             semester: semester,
             levelSemesterTag: `${level}/${semester}`
         };
-        updateProfile(updatedData);
+        await updateProfile(updatedData); // wait for context update
+
     };
 
     // ✅ Safely decide the display name
@@ -126,7 +142,7 @@ import { useAuth } from '../Contexts/AuthContext';
                             <p className='lg:text-3xl md:text-2xl text-xs font-bold text-white'>Level : {displayLevel}</p>
                             <p className='lg:text-3xl md:text-2xl text-xs font-bold text-white'>Semester : {displaySemester}</p>
 
-                            <div className='relative'>
+                            <div className='relative' ref={dropdownRef}>
                                 <MdOutlineModeEdit onClick={() => setOpenEdit(!openEdit)} className='text-[rgb(255,199,39)] lg:text-3xl text-2xl cursor-pointer' />
 
                                 {openEdit && (

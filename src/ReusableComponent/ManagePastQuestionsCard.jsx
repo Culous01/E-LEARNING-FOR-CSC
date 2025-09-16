@@ -1,6 +1,6 @@
 export const ManagePastQuestionsCard = ({pastQuestionsImg, courseTitle, level, semester}) => {
     return (
-        <div className="grid grid-cols-2 lg:gap-10 md:gap-10 gap-5">
+        <div className="grid grid-cols-2 lg:gap-10 md:gap-10 gap-5 border-2 hover:border-[rgb(26,46,86)]">
             <div className='flex flex-col justify-center space-y-5 shadow-xl rounded-2xl lg:p-5 p-3.5'>
                 <div className="w-full aspect-[16/10] overflow-hidden">
                     <img src={pastQuestionsImg} className='rounded-xl w-full h-full object-cover'  alt="PastQuestionsImg"/>

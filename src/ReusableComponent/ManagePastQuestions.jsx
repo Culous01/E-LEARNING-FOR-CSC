@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import { IoMdImage } from "react-icons/io";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 
-export const ImageUploader = ({onFileSelect, label}) => {
+export const ImageUploader = ({onFileSelect}) => {
     const [preview, setPreview] = useState(null);
 
     const handleFileChange = (e) => {
@@ -25,19 +25,19 @@ export const ImageUploader = ({onFileSelect, label}) => {
         {preview ? (
             <img
             src={preview}
-            alt="label"
+            alt="preview"
             className="w-24 h-24 object-cover mb-3 rounded-md"
             />
         ) : (
             <>
-                <p className="font-semibold text-gray-700">{label}</p>
+                <p className="font-semibold text-gray-700">Select Image</p>
                 <p className="text-sm text-gray-500">Tap to browse files</p>
             </>
         )}
 
         {/* Hidden input */}
         <input
-            id={label}
+            id="ImageInput"
             type="file"
             accept="image/*"
             onChange={handleFileChange}
@@ -100,15 +100,31 @@ export const ManagePastQuestions = () => {
     const [level, setLevel] = useState('');
     const [semester, setSemester] = useState('');
     const [preview, setPreview] = useState(null);
-    const [selectCoverImage, setSelectCoverImage] = useState(null)
 
-            // Cancel → close & reset form
+    const createPastQuestion = async () => {
+        try {
+            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/createPastQuestions', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            
+
+        } catch (error) {
+            
+        }
+
+    }
+
+    // Cancel → close & reset form
     const handleCancel = () => {
         setCourseTitle('');
         setLevel('');
         setSemester('');
         setPreview(null);
-        setSelectCoverImage(null);
         setOpenEdit(false);
     };
     
@@ -156,15 +172,7 @@ export const ManagePastQuestions = () => {
 
                             <div>
                                 <ImageUploader 
-                                select="Select Cover Image"
-                                onFileSelect={setSelectCoverImage}
-                                />
-                            </div>
-                            
-                            <div>
-                                <ImageUploader 
-                                select="Select Image"
-                                onFileSelect={setPreview}
+                                    onFileSelect={setPreview}
                                 />
                             </div>
 

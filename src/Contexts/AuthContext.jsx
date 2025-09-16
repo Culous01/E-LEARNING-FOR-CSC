@@ -130,6 +130,21 @@ export const AuthProvider = ({ children }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedData),
             })
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // ✅ Update the local user immediately so Dashboard re-renders
+                setUser((prev) => ({ ...prev, ...updatedData }));
+                
+                // 🔄 Refetch courses if they depend on level/semester
+                await fetchCourses();
+
+                console.log('Profile updated successfully:', data);
+            } else {
+                console.error('Failed to update profile:', data);
+                toast.error(data.message || 'Failed to update profile.');
+            }
             console.log("Updating profile with data:", updatedData);
             console.log(response);
             
