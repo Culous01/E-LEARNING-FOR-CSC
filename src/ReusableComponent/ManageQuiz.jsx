@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export const QuizInput = ({id, name, value, onchange}) => {
     return (
@@ -23,11 +23,37 @@ export const ManageQuiz = () => {
     const [optionC, setOptionC] = useState('');
     const [optionD, setOptionD] = useState('');
     const [correctAnswer, setCorrectAnswer] = useState('');
+
+    const quiz = {
+        courseCode: courseCode,
+        courseTitle: courseTitle,
+        question: question,
+        optionA: optionA,
+        optionB: optionB,
+        optionC: optionC,
+        optionD: optionD,
+        correctAnswer: correctAnswer
+    }
+
+    const createQuiz = async () => {
+        try {
+            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/quiz', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(quiz), 
+            })
+
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     
     
     // Handle save button click
     const handleSave = () => {
-
+        createQuiz();
     };
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect ,useState, useRef } from 'react';
 import { FaPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { BiSolidFilePdf } from "react-icons/bi";
@@ -178,6 +178,20 @@ export const ManagePDF = () => {
     const [semester, setSemester] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedCoverImage, setSelectedCoverImage] = useState(null);
+    const dropdownRef = useRef(null);
+
+    // ✅ Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+        // If dropdown is open and the click target is NOT inside the dropdown or the edit button, close it
+        if (openEdit && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+            setOpenEdit(false);
+        }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [openEdit]);
 
         // Handle Delete Pdf
     const handleDelete = (id) => {
@@ -237,7 +251,7 @@ export const ManagePDF = () => {
         <div className='w-full flex flex-col space-y-6 lg:p-8 md:p-8 p-4 rounded-2xl shadow-lg/20 my-10 shrink-0'>
             <h1 className='text-[rgba(26,46,86,1)] font-bold lg:text-4xl md:text-3xl text-2xl'>Manage PDFs</h1>
 
-            <div className="relative w-full flex">
+            <div className="relative w-full flex" ref={dropdownRef}>
                 <button onClick={() => setOpenEdit(!openEdit)} className="flex items-center gap-1 lg:px-8 md:px-8 px-5  py-3 lg:text-base md:text-base text-xs bg-[rgba(26,46,86,1)] text-[rgb(255,199,39)] font-bold rounded-xl"><FaPlus />Add PDF</button>
 
                 {openEdit && (

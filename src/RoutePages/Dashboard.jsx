@@ -111,7 +111,6 @@ import { useAuth } from '../Contexts/AuthContext';
             levelSemesterTag: `${level}/${semester}`
         };
         await updateProfile(updatedData); // wait for context update
-
     };
 
     // ✅ Safely decide the display name
@@ -160,7 +159,7 @@ import { useAuth } from '../Contexts/AuthContext';
                                         </div>
 
                                         <div className='flex justify-end'>
-                                            <button onClick={handleSave} className='bg-[rgb(26,46,86)] text-[rgb(255,199,39)] font-bold px-10 py-3 rounded-xl'>Save</button>
+                                            <button onClick={handleSave} className='bg-[rgb(26,46,86)] text-[rgb(255,199,39)] font-bold px-10 py-3 cursor-pointer rounded-xl'>Save</button>
                                         </div>
                                     </div>
                                 )}
@@ -170,7 +169,7 @@ import { useAuth } from '../Contexts/AuthContext';
                 </div>
             </div>
 
-            {courses.length > 0 ? (<div className='grid grid-cols-2 mx-auto max-w-7xl lg:px-10 md:px-10 px-5 justify-center lg:gap-10 gap-6 my-14'>                    
+            {courses.length > 0 ? (<div className='grid grid-cols-2 mx-auto max-w-7xl lg:px-10 lg:py-5 md:px-10 md:py-5 px-5 justify-center lg:gap-10 gap-6 my-14'>                    
                 {courses.map((course, index) => (
                     <MaterialsCard
                     key={ index}

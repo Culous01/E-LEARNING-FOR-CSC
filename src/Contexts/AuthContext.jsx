@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(false);
+        setLoading(true);
     }, []);
 
     // For authentication functions
@@ -135,11 +135,7 @@ export const AuthProvider = ({ children }) => {
 
             if (response.ok) {
                 // ✅ Update the local user immediately so Dashboard re-renders
-                setUser((prev) => ({ ...prev, ...updatedData }));
-                
-                // 🔄 Refetch courses if they depend on level/semester
-                await fetchCourses();
-
+                setUser(data.user);
                 console.log('Profile updated successfully:', data);
             } else {
                 console.error('Failed to update profile:', data);
