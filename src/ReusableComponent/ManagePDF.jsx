@@ -173,7 +173,9 @@ export const ManageQuizArray = ({SelectedPdf, Description, Time, onDelete}) => {
 export const ManagePDF = () => {
     const [managePdf, setManagePdf] = useState([])
     const [openEdit, setOpenEdit] = useState(false);
+    const [courseCode, setCourseCode] = useState('');
     const [courseTitle, setCourseTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [level, setLevel] = useState('');
     const [semester, setSemester] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -200,7 +202,9 @@ export const ManagePDF = () => {
 
         // Cancel → close & reset form
     const handleCancel = () => {
+        setCourseCode('');
         setCourseTitle('');
+        setDescription('');
         setLevel('');
         setSemester('');
         setSelectedFile(null);
@@ -212,38 +216,66 @@ export const ManagePDF = () => {
     const handleSave = async () => {
         try {
             const pdfData = new FormData();
+            pdfData.append("courseCode", courseCode);
             pdfData.append("courseTitle", courseTitle);
-            pdfData.append("level", level);
-            pdfData.append("semester", semester);
+            pdfData.append("description", description);
+            pdfData.append("levelSemesterTag", `${level}/${semester}`);
             pdfData.append("pdf", selectedFile);
+            pdfData.append("coverImage", selectedCoverImage);
 
-            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/createPastQuestion', {
-            method: "POST",
-            body: (pdfData),
+            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/courses/addPdfCourse', {
+                method: "POST",
+                body: pdfData,
                 credentials: 'include',
-        });
+            });
 
             if (!response.ok) {
-                throw new Error("Failed to upload PDF");
+                throw new Error("Failed to upload PDF course");
             }
 
             const data = await response.json();
             console.log("Upload successful:", data);
 
-        // setManagePdf((prev) => [
-        //     ...prev,
-        //     {
-        //         id: data.id || Date.now(), // fallback ID if backend doesn’t return one
-        //         selectedPdf: courseTitle,
-        //         description: `${level} - Semester ${semester}`,
-        //         time: new Date().toLocaleString(),
-        //     },
-        // ]);
-
+            // Optionally update local state/UI
+            setManagePdf((prev) => [
+                ...prev,
+                {
+                    id: data.id || Date.now(),
+                    selectedPdf: courseTitle,
+                    description: description,
+                    time: new Date().toLocaleString(),
+                },
+            ]);
         } catch (error) {
-            console.error("Error uploading PDF:", error);
+            console.error("Error uploading PDF course:", error);
+            alert("Error uploading PDF course.");
         } finally {
             setOpenEdit(false);
+            handleCancel();
+        }
+    };
+
+    const handleDeletePdfCourse = async (id) => {
+        try {
+            const response = await fetch(
+                `https://final-year-project-elearing-backend.onrender.com/api/v1/courses/deletePdfCourse/${id}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include',
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setManagePdf((prev) => prev.filter((item) => (item.id || item._id || "") !== id));
+                alert('PDF course deleted successfully!');
+            } else {
+                alert(data.message || 'Failed to delete PDF course.');
+            }
+        } catch (error) {
+            alert('Error deleting PDF course.');
+            console.error(error);
         }
     };
 
@@ -252,7 +284,7 @@ export const ManagePDF = () => {
             <h1 className='text-[rgba(26,46,86,1)] font-bold lg:text-4xl md:text-3xl text-2xl'>Manage PDFs</h1>
 
             <div className="relative w-full flex" ref={dropdownRef}>
-                <button onClick={() => setOpenEdit(!openEdit)} className="flex items-center gap-1 lg:px-8 md:px-8 px-5  py-3 lg:text-base md:text-base text-xs bg-[rgba(26,46,86,1)] text-[rgb(255,199,39)] font-bold rounded-xl"><FaPlus />Add PDF</button>
+                <button onClick={() => setOpenEdit(!openEdit)} className="flex items-center gap-1 lg:px-8 md:px-8 px-5  py-3 lg:text-base md:text-base text-xs bg-[rgba(26,46,86,1)] text-[rgb(255,199,39)] font-bold rounded-xl cursor-pointer"><FaPlus />Add PDF</button>
 
                 {openEdit && (
                     <div className="absolute w-full top-10 bg-white p-5 rounded-md shadow-lg/20 z-10 flex flex-col">
@@ -262,6 +294,19 @@ export const ManagePDF = () => {
 
                         <div className='mt-10 flex flex-col gap-6'>
                             <div className='flex flex-col gap-1'>
+                                <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Course Code:</p>
+                                <input
+                                    type="text"
+                                    id="courseCode"
+                                    name="courseCode"
+                                    value={courseCode}
+                                    onChange={(e) => setCourseCode(e.target.value)}
+                                    autoComplete="off"
+                                    className='w-full flex items-center justify-between gap-2 border-2 border-[rgb(26,46,86)] py-2 px-4 rounded-xl font-bold text-[rgb(26,46,86)] lg:text-xl md:text-xl text-base focus:outline-none'
+                                />
+                            </div>
+
+                            <div className='flex flex-col gap-1'>
                                 <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Course Title:</p>
                                 <input
                                     type="text"
@@ -269,6 +314,19 @@ export const ManagePDF = () => {
                                     name="courseTitle"
                                     value={courseTitle}
                                     onChange={(e) => setCourseTitle(e.target.value)}
+                                    autoComplete="off"
+                                    className='w-full flex items-center justify-between gap-2 border-2 border-[rgb(26,46,86)] py-2 px-4 rounded-xl font-bold text-[rgb(26,46,86)] lg:text-xl md:text-xl text-base focus:outline-none'
+                                />
+                            </div>
+
+                            <div className='flex flex-col gap-1'>
+                                <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Description:</p>
+                                <input
+                                    type="text"
+                                    id="description"
+                                    name="description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                     autoComplete="off"
                                     className='w-full flex items-center justify-between gap-2 border-2 border-[rgb(26,46,86)] py-2 px-4 rounded-xl font-bold text-[rgb(26,46,86)] lg:text-xl md:text-xl text-base focus:outline-none'
                                 />
@@ -309,7 +367,7 @@ export const ManagePDF = () => {
                     SelectedPdf={item.selectedPdf}
                     Description={item.description}
                     Time={item.time}
-                    onDelete={() => handleDelete(item.id || index)}
+                    onDelete={() => handleDeletePdfCourse(item.id || item._id || index)}
                     />
                 ))
                 ) : (

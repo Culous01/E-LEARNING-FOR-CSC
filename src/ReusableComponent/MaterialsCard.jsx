@@ -12,9 +12,8 @@ export const ViewButton = ({text, bgColor, onClick}) => {
 }
 
 const MaterialsCard = ({cardImage, courseCode, title, pdfUrl}) => {
-
     return (
-        <div className='flex flex-col bg-white shadow-xl/30 rounded-2xl overflow-hidden hover:border-2 hover:border-[rgb(26,46,86)]'>
+        <div className='flex flex-col bg-white shadow-xl/30 lg:rounded-4xl rounded-2xl overflow-hidden border-2 border-white hover:border-[rgb(26,46,86)]'>
             <div className='w-full flex flex-col space-y-2 lg:px-5 lg:pt-5 md:px-5 md:pt-5 px-2.5 pt-2.5 pb-2'>
                 <div className='w-full lg:h-96 md:h-96 h-30 rounded-xl overflow-hidden'>
                     <img src={cardImage} className='w-full h-full object-cover rounded-xl' alt="" />

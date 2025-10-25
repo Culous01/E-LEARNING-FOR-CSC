@@ -121,6 +121,24 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        let timeout = setTimeout(() => setLoading(false), 8500); // max 5s
+
+        const fetchUser = async () => {
+            try {
+            await userProfile();
+            } finally {
+            clearTimeout(timeout);
+            setLoading(false);
+            }
+        };
+
+        fetchUser();
+
+        return () => clearTimeout(timeout);
+    }, []);
+
+
     // update user profile function
     const updateProfile = async (updatedData) => {
         try {

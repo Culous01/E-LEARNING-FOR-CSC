@@ -96,29 +96,66 @@ export const ImageUploader = ({onFileSelect}) => {
 export const ManagePastQuestions = () => {
     const [pastQuestions, setPastQuestions] = useState([]);
     const [openEdit, setOpenEdit] = useState(false);
-    const [courseTitle, setCourseTitle] = useState('');
+    const [courseCode, setCourseCode] = useState('');
+    const [year, setYear] = useState('');
     const [level, setLevel] = useState('');
     const [semester, setSemester] = useState('');
     const [preview, setPreview] = useState(null);
     const dropdownRef = useRef(null);
 
-    // const createPastQuestion = async () => {
-    //     try {
-    //         const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/createPastQuestions', {
-    //             method: 'GET',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             credentials: 'include',
-    //         });
+    // Create Past Question Function
+const createPastQuestion = async () => {
+    try {
+        const formData = new FormData();
+        formData.append('courseCode', courseCode);
+        formData.append('year', year);
+        formData.append('level', level);
+        formData.append('semester', semester);
+        formData.append('image', preview); // preview is the image file
 
-            
+        const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestions/createPastQuestion', {
+            method: 'POST',
+            credentials: 'include',
+            body: formData,
+        });
 
-    //     } catch (error) {
-            
-    //     }
+        const data = await response.json();
 
-    // }
+        if (response.ok) {
+            setPastQuestions(prev => [...prev, data.pastQuestion]);
+            alert('Past question added successfully!');
+            handleCancel();
+        } else {
+            alert(data.message || 'Failed to add past question.');
+        }
+    } catch (error) {
+        alert('Error adding past question.');
+        console.error(error);
+    }
+};
+
+    // Delete Past Question Function
+const handleDeletePastQuestion = async (id) => {
+    try {
+        const response = await fetch(`https://final-year-project-elearing-backend.onrender.com/api/v1/pastQuestion/deletePastQuestion/${id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Remove the deleted item from state
+            setPastQuestions(prev => prev.filter(item => item.id !== id));
+            alert('Past question deleted successfully!');
+        } else {
+            alert(data.message || 'Failed to delete past question.');
+        }
+    } catch (error) {
+        alert('Error deleting past question.');
+        console.error(error);
+    }
+};
 
     // ✅ Close dropdown when clicking outside
     useEffect(() => {
@@ -135,7 +172,8 @@ export const ManagePastQuestions = () => {
 
     // Cancel → close & reset form
     const handleCancel = () => {
-        setCourseTitle('');
+        setCourseCode('');
+        setYear('');
         setLevel('');
         setSemester('');
         setPreview(null);
@@ -144,6 +182,7 @@ export const ManagePastQuestions = () => {
     
     // Handle save button click
     const handleSave = () => {
+        createPastQuestion();
         setOpenEdit(false);
     };
 
@@ -152,7 +191,7 @@ export const ManagePastQuestions = () => {
             <h1 className='text-[rgba(26,46,86,1)] font-bold lg:text-4xl md:text-3xl text-2xl'>Manage past questions</h1>
 
             <div className="relative w-full flex space-x-4" ref={dropdownRef}>
-                <button onClick={() => setOpenEdit(!openEdit)} className="flex items-center gap-1 lg:px-8 md:px-8 px-5  py-3 lg:text-base md:text-base text-xs bg-[rgba(26,46,86,1)] text-[rgb(255,199,39)] font-bold rounded-xl"><FaPlus />Add Image</button>
+                <button onClick={() => setOpenEdit(!openEdit)} className="flex items-center gap-1 lg:px-8 md:px-8 px-5 py-3 lg:text-base md:text-base text-xs bg-[rgba(26,46,86,1)] text-[rgb(255,199,39)] font-bold rounded-xl cursor-pointer"><FaPlus />Add Image</button>
                 
                 {openEdit && (
                     <div className="absolute lg:w-full md:w-full w-full top-10 bg-white p-5 rounded-md shadow-lg/20 z-10 flex flex-col">
@@ -162,13 +201,28 @@ export const ManagePastQuestions = () => {
 
                         <div className='mt-10 flex flex-col gap-5'>
                             <div className='flex flex-col gap-1'>
-                                <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Course Title:</p>
+                                <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Course Code:</p>
                                 <input
                                     type="text"
-                                    id="courseTitle"
-                                    name="courseTitle"
-                                    value={courseTitle}
-                                    onChange={(e) => setCourseTitle(e.target.value)}
+                                    id="courseCode"
+                                    name="courseCode"
+                                    value={courseCode}
+                                    placeholder='CSC101'
+                                    onChange={(e) => setCourseCode(e.target.value)}
+                                    autoComplete="off"
+                                    className='w-full flex items-center justify-between gap-2 border-2 border-[rgb(26,46,86)] py-2 px-4 rounded-xl font-bold text-blue-950 lg:text-xl md:text-xl text-base focus:outline-none'
+                                />
+                            </div>
+
+                            <div className='flex flex-col gap-1'>
+                                <p className='lg:text-xl text-base text-[rgb(26,46,86)] font-semibold'>Year:</p>
+                                <input
+                                    type="text"
+                                    id="year"
+                                    name="year"
+                                    value={year}
+                                    placeholder='2025/2026'
+                                    onChange={(e) => setYear(e.target.value)}
                                     autoComplete="off"
                                     className='w-full flex items-center justify-between gap-2 border-2 border-[rgb(26,46,86)] py-2 px-4 rounded-xl font-bold text-blue-950 lg:text-xl md:text-xl text-base focus:outline-none'
                                 />
@@ -191,8 +245,8 @@ export const ManagePastQuestions = () => {
                             </div>
 
                             <div className='flex w-full space-x-4 mt-10'>
-                                <button onClick={handleCancel} className='w-full bg-red-500 text-white font-bold py-2 rounded-xl'>Cancel</button>
-                                <button onClick={handleSave} className='w-full bg-[rgb(26,46,86)] text-[rgb(255,199,39)] font-bold py-2 rounded-xl'>Save</button>
+                                <button onClick={handleCancel} className='w-full bg-red-500 text-white font-bold py-2 rounded-xl cursor-pointer'>Cancel</button>
+                                <button onClick={handleSave} className='w-full bg-[rgb(26,46,86)] text-[rgb(255,199,39)] font-bold py-2 rounded-xl cursor-pointer'>Save</button>
                             </div>                        
                         </div>
                     </div>
@@ -207,7 +261,7 @@ export const ManagePastQuestions = () => {
                         courseTitle={item.courseTitle}
                         level={item.level}
                         semester={item.semester}
-                        onDelete={() => handleDelete(item.id || index)}
+                        onDelete={() => handleDeletePastQuestion(item.id || index)}
                     />))) : (
                                 <div className="flex justify-center items-center h-64">
                                     <p className="text-gray-500 text-lg">No Past Questions is available</p>

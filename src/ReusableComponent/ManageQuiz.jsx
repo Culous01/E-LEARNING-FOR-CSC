@@ -24,36 +24,42 @@ export const ManageQuiz = () => {
     const [optionD, setOptionD] = useState('');
     const [correctAnswer, setCorrectAnswer] = useState('');
 
-    const quiz = {
-        courseCode: courseCode,
-        courseTitle: courseTitle,
-        question: question,
-        optionA: optionA,
-        optionB: optionB,
-        optionC: optionC,
-        optionD: optionD,
-        correctAnswer: correctAnswer
-    }
+const createNewQuiz = async () => {
+    const quizData = {
+        courseCode,
+        courseTitle,
+        question,
+        optionA,
+        optionB,
+        correctAnswer,
+    };
 
-    const createQuiz = async () => {
-        try {
-            const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/quiz', {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(quiz), 
-            })
+    try {
+        const response = await fetch('https://final-year-project-elearing-backend.onrender.com/api/v1/cquiz/', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(quizData),
+        });
 
-            console.log(response)
-        } catch (error) {
-            console.error(error)
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Quiz added successfully!');
+            console.log('Quiz added:', data);
+        } else {
+            alert(data.message || 'Failed to add quiz.');
         }
+    } catch (error) {
+        alert('Error adding quiz.');
+        console.error(error);
     }
+};
     
     
     // Handle save button click
     const handleSave = () => {
-        createQuiz();
+        createNewQuiz();
     };
 
     return (
